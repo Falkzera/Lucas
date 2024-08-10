@@ -1,0 +1,8 @@
+streamlit
+streamlit_option_menu
+pandas
+os
+requests
+json
+Image
+re

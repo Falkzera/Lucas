@@ -5,8 +5,12 @@ import json
 
 # Função para carregar dados e criar o mapa
 def create_map():
-    # Base de dados
-    df = pd.read_csv('Portifolios/exportacoes/SerieExportacoesAL.csv')
+    file_path = 'Portifolios/exportacoes/SerieExportacaoAl.csv'
+    try:
+        df = pd.read_csv(file_path)
+    except FileNotFoundError:
+        st.error('Arquivo não encontrado')
+        return
 
     # Geojson com os municípios de Alagoas
     with open('Portifolios/exportacoes/Alagoas_Mapa.geojson') as f:
@@ -32,7 +36,7 @@ def create_map():
     # Agrupar os dados por município e somar os valores
     df_filtrado = df_filtrado.groupby('Nome_Município').sum().reset_index()
 
-    # Criar um DataFrame completo com todos os municípios e valores zerados
+    # Criar um DataFrame completo com todos os municípios e valores zeradosc
     df_completo = pd.DataFrame(municipios_geojson, columns=['Nome_Município'])
     df_completo = df_completo.merge(df_filtrado, on='Nome_Município', how='left').fillna(0)
 
@@ -66,9 +70,12 @@ def create_map():
             plot_bgcolor='rgba(0, 0, 0, 0)',
             paper_bgcolor='rgba(0, 0, 0, 0)',
             margin=dict(l=0, r=0, t=0, b=0),
-            height=400,
+            height=900,
             coloraxis_showscale=False,
-            geo=dict(bgcolor='rgba(0,0,0,0)')
+            geo=dict(bgcolor='rgba(0,0,0,0)',
+                     projection_scale=5,
+                     
+                     )
         )
         return choropleth
 
@@ -83,4 +90,5 @@ def create_map():
     st.plotly_chart(choropleth_fig)
 
 # Chamar a função create_map
-create_map()
+if __name__ == "__main__":
+    create_map()

@@ -5,10 +5,15 @@ from PIL import Image
 import json
 import requests
 import re
-from map_visualization import create_map
+import streamlit as st
+from Tema.theme_manager import theme_selector 
 
 # Configuração de Página como wide
 st.set_page_config(layout="wide")
+
+# Aplicação de tema
+# Chamar o seletor de tema
+theme_selector()
 
 # Função para carregar o arquivo JSON
 def load_lottiefile(filepath: str):
@@ -48,27 +53,6 @@ def social_media_button(platform, url):
         st.write(f"[Abrir {platform}]({url})")
 
 #####################################################################################################
-# SideBar Config
-
-with st.sidebar:
-    social_media_html = """
-    <div style="text-align: center;">
-        <h2>Redes Sociais</h2>
-        <a href="https://www.instagram.com/falkzera/" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width:40px;height:40px;margin:10px;">
-        </a>
-        <a href="https://github.com/falkzera" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" style="width:40px;height:40px;margin:10px;">
-        </a>
-    </div>
-    """
-    st.markdown(social_media_html, unsafe_allow_html=True)
-
-    st.markdown('---')
-    # st.lottie(assets['foguete'], height=200, speed=10)
-    st.sidebar.markdown('Developer by: [Lucas Falcão](https://GitHub.com/Falkzera)')
-
-
 # Container Principal
 with st.container():
     col1, col2 = st.columns(2)
@@ -105,8 +89,8 @@ with st.container():
 with st.container():
     selected = option_menu(
         menu_title = None,
-        options = ["Sobre mim","Cursos", "Projetos", "Contato"],
-        icons = ['person', 'book', 'code-slash', 'chat-left-text-fill'],
+        options = ["Sobre mim","Cursos", "Contato"],
+        icons = ['person', 'book', 'chat-left-text-fill'],
         orientation='horizontal',
     )
 st.write("---")
@@ -118,10 +102,8 @@ if selected == "Sobre mim":
     scroll_to_projects()
     pass
 
-
 if selected == 'Cursos':
     
-        
     col1, col2 = st.columns(2)
     with col1: # FORMAÇÃO ACADÊMICA
         with st.expander("**FORMAÇÃO E ESPECIALIZAÇÃO**", expanded=False):
@@ -140,32 +122,6 @@ if selected == 'Cursos':
             st.write("Estatística - 2024")
             st.write("---")
 
-# Projetos
-if selected == "Projetos":
-    
-    col1, col2 = st.columns(2)
-    with col1:
-        with st.expander("**EXPORTAÇÃO ALAGOAS** 🌍", expanded=False):
-                st.write("## Análise das exportações no estado de Alagoas")
-                st.write("O objetivo desse projeto foi de analisar as exportações do estado de Alagoas, com base nos dados disponibilizados pelo Governo Federal. Realizando uma análise exploratória dos dados, e criando um mapa coroplético para visualização dos dados.")
-                st.write('Visualize o projeto completo: [Clique Aqui](https://exportacoes.streamlit.app/)')
-                st.caption("Fonte: Governo Federal")
-                create_map()
-    with col2:
-        with st.expander("**EDIFICAÇÕES AGROPECUÁRIAS** 🌍", expanded=False):
-                st.write("## Mapeamento das edificações agropecuárias no estado de Alagoas")
-                st.write("O intuito do projeto foi realizar um mapeamento das edificações agropecuárias no estado de Alagoas.")
-                st.write('Visualize o projeto completo: [Clique Aqui](https://exportacoes.streamlit.app/)')
-                st.caption("Fonte: IBGE")
-                
- 
-
-
-
-
-
-
-
 
 # Contato
 # Formulário de Contato
@@ -175,8 +131,7 @@ if selected == "Contato":
     with col1:
         st.header("Envie-me um Email :email:")
         st.caption("E-mail via FormSubmit. O aplicativo está em desenvolvimento, então pode não funcionar corretamente. Caso não funcione, entre em contato pelas redes na sidebar.")
-    with col2:
-        st.lottie(assets['lottie_contato'], height=100)
+
 
 # Validação para e-mail
     with st.form(key='contact_form'):
@@ -208,13 +163,22 @@ if selected == "Contato":
             st.error("Por favor, preencha todos os campos.")
 
 
-
-
-
-
-
-
-
+#####################################################################################################
+# Cŕeditos
+with st.sidebar:
+    social_media_html = """
+    <div style="text-align: center;">
+        <h2>Redes Sociais</h2>
+        <a href="https://www.instagram.com/falkzera/" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width:40px;height:40px;margin:10px;">
+        </a>
+        <a href="https://github.com/falkzera" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" style="width:40px;height:40px;margin:10px;">
+        </a>
+        <p style="text-align: center;">Developer by: <a href="https://GitHub.com/Falkzera" target="_blank">Lucas Falcão</a></p>
+    </div>
+    """
+    st.markdown(social_media_html, unsafe_allow_html=True)
 
 
 
