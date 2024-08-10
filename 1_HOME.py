@@ -6,13 +6,15 @@ import json
 import requests
 import re
 import streamlit as st
-from Tema.theme_manager import theme_selector 
+from Tema.theme_manager import theme_selector
 
 # Configuração de Página como wide
 st.set_page_config(layout="wide")
 
 # Aplicação de tema
 # Chamar o seletor de tema
+
+# Chame a função para mostrar o botão de alternância de tema
 theme_selector()
 
 # Função para carregar o arquivo JSON

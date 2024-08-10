@@ -1,41 +1,47 @@
 import streamlit as st
-import os
 
-def update_config(theme):
-    """Atualiza o arquivo config.toml com o tema selecionado."""
-    config_path = os.path.join(os.path.expanduser("~"), ".streamlit", "config.toml")
-    
-    # Conteúdo do config.toml com o tema selecionado
-    config_content = f"""
-[theme]
-primaryColor = "#FF4B4B"
-backgroundColor = "#{ '0E1117' if theme == 'dark' else 'FFF' }"
-secondaryBackgroundColor = "#{ '262730' if theme == 'dark' else 'F5F5F5' }"
-textColor = "#{ 'FFF' if theme == 'dark' else '000' }"
-font = "sans serif"
-"""
-    # Cria a pasta .streamlit se não existir
-    os.makedirs(os.path.dirname(config_path), exist_ok=True)
-    
-    # Escreve o conteúdo no arquivo config.toml
-    with open(config_path, "w") as config_file:
-        config_file.write(config_content)
+ms = st.session_state
+if "themes" not in ms: 
+    ms.themes = {
+        "current_theme": "light",
+        "refreshed": True,
+            "light": {
+                "theme.base": "light",
+                "theme.backgroundColor": "#FFFFFF",  # Cor de fundo padrão para o tema claro
+                "theme.primaryColor": "#F63366",     # Cor primária padrão para o tema claro
+                "theme.secondaryBackgroundColor": "#F0F2F6",  # Cor de fundo secundária padrão para o tema claro
+                "theme.textColor": "#000000",        # Cor do texto padrão para o tema claro
+                "button_face": "🌞"
+            },
+            "dark": {
+                "theme.base": "dark",
+                "theme.backgroundColor": "#0E1117",  # Cor de fundo padrão para o tema escuro
+                "theme.primaryColor": "#1E90FF",     # Cor primária padrão para o tema escuro
+                "theme.secondaryBackgroundColor": "#262730",  # Cor de fundo secundária padrão para o tema escuro
+                "theme.textColor": "#FFFFFF",        # Cor do texto padrão para o tema escuro
+                "button_face": "🌜"
+}}
+
+def ChangeTheme():
+    previous_theme = ms.themes["current_theme"]
+    tdict = ms.themes["light"] if ms.themes["current_theme"] == "light" else ms.themes["dark"]
+    for vkey, vval in tdict.items(): 
+        if vkey.startswith("theme"): 
+            st._config.set_option(vkey, vval)
+
+    ms.themes["refreshed"] = False
+    if previous_theme == "dark": 
+        ms.themes["current_theme"] = "light"
+    elif previous_theme == "light": 
+        ms.themes["current_theme"] = "dark"
 
 def theme_selector():
-    """Cria um seletor de tema e aplica o tema selecionado."""
-    # Gerenciar o estado do tema
-    if  'theme' not in st.session_state:
-        st.session_state.theme = 'light'
+    btn_face = ms.themes["light"]["button_face"] if ms.themes["current_theme"] == "light" else ms.themes["dark"]["button_face"]
+    st.sidebar.button(btn_face, on_click=ChangeTheme)
 
-    st.sidebar.markdown("# Tema")
-    theme = st.sidebar.selectbox('Escolha o tema', ['light', 'dark'], index=['light', 'dark'].index(st.session_state.theme))
-    st.sidebar.button('Aplicar')
- 
-    # Atualizar o estado do tema
-    st.session_state.theme = theme
-
-    # Atualizar o arquivo config.toml
-    update_config(theme)
+    if ms.themes["refreshed"] == False:
+        ms.themes["refreshed"] = True
+        st.rerun()
 
 if __name__ == "__main__":
     theme_selector()
