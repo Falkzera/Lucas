@@ -59,7 +59,6 @@ def theme_selector():
 
     if st.session_state.themes["refreshed"] == False:
         st.session_state.themes["refreshed"] = True
-        st.experimental_rerun()
-
-if __name__ == "__main__":
-    theme_selector()
+        try:
+            st.experimental_rerun()
+        except: AttributeError
