@@ -15,7 +15,10 @@ st.set_page_config(layout="wide")
 # Chamar o seletor de tema
 
 # Chame a função para mostrar o botão de alternância de tema
+# try:
 theme_selector()
+# except:
+#     print('Aguarde um momento')
 
 # Função para carregar o arquivo JSON
 def load_lottiefile(filepath: str):
