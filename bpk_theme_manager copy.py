@@ -46,6 +46,3 @@ def theme_selector():
             st.experimental_rerun()
         except: # Aparentemente é um erro de atributo. Que não impede a funcionalidade.
             pass
-
-if __name__ == "__main__":
-    theme_selector()

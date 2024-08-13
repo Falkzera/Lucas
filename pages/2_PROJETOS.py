@@ -3,7 +3,6 @@ import streamlit as st
 import pandas as pd
 from streamlit_option_menu import option_menu
 from Portifolios.exportacoes.map_visualization import create_map
-from Tema.theme_manager import theme_selector 
 from Portifolios.Edificacao.Edificacao import plot_map
 
 
@@ -152,4 +151,4 @@ with st.sidebar:
     </div>
     """
     st.markdown(social_media_html, unsafe_allow_html=True)
-    theme_selector()
+   
