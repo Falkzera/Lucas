@@ -54,8 +54,11 @@ def ChangeTheme():
     st.session_state.themes["refreshed"] = False
 
 def theme_selector():
-    btn_face = st.session_state.themes["light"]["button_face"] if st.session_state.themes["current_theme"] == "light" else st.session_state.themes["dark"]["button_face"]
-    st.sidebar.button(f'Clique para alterar o tema ' + btn_face, on_click=ChangeTheme)
+    try:
+        btn_face = st.session_state.themes["light"]["button_face"] if st.session_state.themes["current_theme"] == "light" else st.session_state.themes["dark"]["button_face"]
+        st.sidebar.button(f'Clique para alterar o tema ' + btn_face, on_click=ChangeTheme)
+    except AttributeError:
+        pass
 
     if st.session_state.themes["refreshed"] == False:
         st.session_state.themes["refreshed"] = True
