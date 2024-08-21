@@ -6,7 +6,6 @@ import Home.Sobre_mim as Sobre_mim
 import Home.Email as Email
 import Home.Credito as Credito
 
-
 # Configuração de Página como wide
 st.set_page_config(layout="wide")
 
@@ -26,7 +25,7 @@ if selected == "Sobre mim":
     Sobre_mim.display_profile()
 
 if selected == 'Cursos':
-    Cursos.display_courses()
+    Cursos.display_certificates()
 
 if selected == "Contato":
     Email.display_email_form()
