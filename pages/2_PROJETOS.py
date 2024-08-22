@@ -4,6 +4,7 @@ from streamlit_option_menu import option_menu
 import Home.Credito as Credito
 import Portifolios.exportacoes.exportacoes as exportacoes
 import Portifolios.Edificacao.Mapas_Interativos as Mapas_Interativos
+from Portifolios.CompracaoGestao.ComparacaoGestao import comparacao_gestao
 
 # Configuração de Página
 st.set_page_config(
@@ -22,7 +23,7 @@ st.write('---')
 with st.container():
     selected = option_menu(
         menu_title = None,
-        options = ['Exportações-AL', 'Mapas Interativos'],
+        options = ['Exportações-AL', 'Mapas Interativos', 'Transporte Público'],
         icons = ['code-slash', 'book', 'chat-left-text-fill'],
         orientation='horizontal',
     )
@@ -34,6 +35,9 @@ if selected == "Exportações-AL":
 
 elif selected == "Mapas Interativos":
     Mapas_Interativos.display_interactive_map()
+
+elif selected == "Transporte Público":
+    comparacao_gestao()
 ###########################################################################################
 # Cŕeditos
 with st.sidebar:
