@@ -4,7 +4,7 @@ from Portifolios.exportacoes.map_visualization import create_map
 def display_export_analysis():
     st.title("Análise das exportações no estado de Alagoas 🌍")
     st.subheader("O projeto dispõe de uma interface gráfica interativa para visualização dos dados de exportações do estado de Alagoas, para visualizar na integra, acesse o dashboard abaixo")
-    st.write('Visualize o Dashboard: [Clique Aqui](https://exportacoes.streamlit.app/)')
+    st.write('Visualize o Dashboard: [Clique Aqui](https://exportacoesal.streamlit.app/)')
 
     with st.expander('# Sobre o Projeto', expanded=True):
         st.subheader("Sobre o Projeto 🎯")
@@ -35,14 +35,14 @@ def display_export_analysis():
             </div>
         """, unsafe_allow_html=True)
 
-    st.write('Visualize o projeto completo: [Clique Aqui](https://exportacoes.streamlit.app/)')
+    st.write('Visualize o projeto completo: [Clique Aqui](https://exportacoesal.streamlit.app/)')
 
     with st.expander('Visuzalização Gráfica 🗺️', expanded=True):
         st.subheader("Visualização Gráfica do projeto 🗺️")
         st.subheader("Para facilitar a visualização, foi desenvolvido uma visualização gráfica do mapa do estado de Alagoas.")
         st.subheader("O mapa é interativo, podendo ser filtrado por ano e valor de exportação US$.")
         st.subheader("Permitindo visualizar de maneira dinâmica os municípios que mais exportaram no estado.")
-        st.caption("Para a visualização completa, acesse o dashboard do projeto [Clicando Aqui](https://exportacoes.streamlit.app/)")
+        st.caption("Para a visualização completa, acesse o dashboard do projeto [Clicando Aqui](https://exportacoesal.streamlit.app/)")
         create_map()
 
     st.caption("Fonte: Governo Federal")
