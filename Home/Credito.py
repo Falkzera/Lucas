@@ -1,7 +1,10 @@
 import streamlit as st
 
+
 def display_credits():
     with st.sidebar:
+    
+        st.image('image/falkzera.png', width=200, use_column_width=False)
         
         social_media_html = """
                 <div style="text-align: center;">
@@ -19,16 +22,6 @@ def display_credits():
                 </div>
                 """
         st.markdown(social_media_html, unsafe_allow_html=True)
-
-
-
-
-
-
-
-
-
-
 
 if __name__ == "__main__":
     display_credits()

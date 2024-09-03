@@ -13,6 +13,23 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 
+
+# CSS para ajustar a largura da página
+# page_style = """
+#     <style>
+#     /* Ajusta a largura máxima da página */
+#     .main {
+#         max-width: 1200px;
+#         margin: 0 auto;
+#     }
+#     </style>
+#     """
+
+# Injetando o CSS na aplicação Streamlit
+# st.markdown(page_style, unsafe_allow_html=True)
+
+
+
 # Titulo da Página
 st.title('PROJETOS  🚀')
 st.header('Bem-vindo ao meu portfólio de projetos! :wave:')
